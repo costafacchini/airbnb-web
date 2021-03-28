@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Logo from "../../assets/airbnb-logo-2020.svg";
 import { Form, Container } from "./styles";
+import api from "../../services/api";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -9,9 +10,20 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  function handleSignUp(e) {
+  async function handleSignUp(e) {
     e.preventDefault();
-    alert("Eu vou te registrar");
+
+    if (!username || !email || !password) {
+      setError("Preencha todos os dados para se cadastrar");
+    } else {
+      try {
+        await api.post("/users", { username, email, password });
+        this.props.history.push("/");
+      } catch (err) {
+        console.log(err);
+        setError("Ocorreu um erro ao registrar sua conta. T.T");
+      }
+    }
   }
 
   return (
@@ -42,4 +54,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default withRouter(SignUp);
