@@ -1,3 +1,6 @@
+# About
+This application was following a study guide from [Rocketseat](https://blog.rocketseat.com.br/adonis-auth-jwt-api-rest/).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
